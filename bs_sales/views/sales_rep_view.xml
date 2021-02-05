@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+<record id="sales_rep_form_view" model="ir.ui.view">
+    <field name="name">sales.rep.form</field>
+    <field name="model">sales.rep</field>
+    <field name="arch" type="xml">
+        <form string="Sales Rep">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="company_id" />
+                    </group>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+
+<record id="view_sales_rep_tree" model="ir.ui.view">
+    <field name="name">sales.rep.tree</field>
+    <field name="model">sales.rep</field>
+    <field name="arch" type="xml">
+        <tree string="Sales Rep">
+            <field name="name"/>
+            <field name="code" />
+            <field name="company_id"  groups="base.group_multi_company" optional="show" readonly="1"/>
+        </tree>
+    </field>
+</record>
+
+
+<record id="sales_rep_action" model="ir.actions.act_window">
+    <field name="name">Sales Rep</field>
+    <field name="res_model">sales.rep</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">{'default_company_id': allowed_company_ids[0]}</field>
+</record>
+
+
+<menuitem id="menu_sales_rep"
+    parent="sale.menu_sale_config"
+    name="Sales Rep" 
+    groups="sales_team.group_sale_manager"
+    action="sales_rep_action"/>
+
+</odoo>

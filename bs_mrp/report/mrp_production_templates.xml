@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <template id="report_mrporder_inherit_mrp_storage_type" inherit_id="mrp.report_mrporder">
+        <xpath expr="//div[@class='page']" position="inside">
+            <t t-if="o.storage_type">
+                <span>
+                    <strong>Storage Type Description:</strong>
+                </span>  
+                <br/>      
+                <span t-field="o.storage_type.description" style="color:red;font-weight:bold;"/>
+            </t>
+        </xpath>
+</template>
+</odoo>

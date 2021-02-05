@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','stock','sale_stock'],
+    'depends': ['base','stock','sale_stock','bs_sales'],
     # always loaded
     'data': [
         'views/stock_picking_view.xml',

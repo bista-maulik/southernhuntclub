@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="cust_assests" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/switch_company/static/src/js/widgets/switch_company_menu_cust.js"></script>
+        </xpath>
+    </template>
+</odoo>

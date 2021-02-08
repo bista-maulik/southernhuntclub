@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+   
+
+   <record id="storage_type_form_view" model="ir.ui.view">
+    <field name="name">storage.type.form</field>
+    <field name="model">storage.type</field>
+    <field name="arch" type="xml">
+        <form string="Storage Type">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="company_id" />
+                    </group>
+                </group>
+            </sheet>
+             <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+
+<record id="view_storage_type_tree" model="ir.ui.view">
+    <field name="name">storage.type.tree</field>
+    <field name="model">storage.type</field>
+    <field name="arch" type="xml">
+        <tree string="Storage Type">
+            <field name="name"/>
+            <field name="description" />
+            <field name="company_id" />
+        </tree>
+    </field>
+</record>
+
+
+<record id="storage_type_action" model="ir.actions.act_window">
+    <field name="name">Storage Type</field>
+    <field name="res_model">storage.type</field>
+    <field name="view_mode">tree,form</field>
+</record>
+    
+    <menuitem id="menu_storage_type"
+        action="storage_type_action"
+        parent="mrp.menu_mrp_configuration"
+        name="Storage Type" 
+        groups="mrp.group_mrp_manager"/>
+</odoo>

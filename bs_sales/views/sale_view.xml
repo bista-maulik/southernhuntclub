@@ -18,11 +18,12 @@
                 <field name="sales_rep"  required="1" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
             </xpath>
             <xpath expr="//field[@name='show_update_pricelist']" position="before">
-                <field name="cancellation_date"  attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
                 <label for="commitment_date" string="Delivery Date"/>
                 <div name="commitment_date_div_custom" class="o_row" >
                     <field name="commitment_date" />
                 </div>
+                <field name="cancellation_date"  attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+
             </xpath>
         </field>
     </record>

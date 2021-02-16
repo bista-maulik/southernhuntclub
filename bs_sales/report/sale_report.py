@@ -7,10 +7,15 @@ class SaleReport(models.Model):
     _inherit = "sale.report"
     
     sales_rep = fields.Many2one('sales.rep',string='Sales Rep', readonly=True)
+    commitment_date = fields.Datetime('Delivery Date', readonly=True)
+
+
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['sales_rep'] = ", s.sales_rep as sales_rep"
+        fields['commitment_date'] = ", s.commitment_date as commitment_date"
         groupby += ', s.sales_rep'
+        groupby +=', s.commitment_date'
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
 
     @api.model

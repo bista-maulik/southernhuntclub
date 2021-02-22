@@ -8,7 +8,9 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
+from datetime import datetime
+
 
 
 class SaleOrder(models.Model):
@@ -16,15 +18,17 @@ class SaleOrder(models.Model):
 
     sales_rep = fields.Many2one('sales.rep',string='Sales Rep',domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",tracking=1)
     cancellation_date = fields.Datetime('Cancellation Date', copy=False,tracking=1)
+    commitment_date = fields.Datetime('Delivery Date', copy=False,
+                                      states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
+                                      help="This is the delivery date promised to the customer. "
+                                           "If set, the delivery order will be scheduled based on "
+                                           "this date rather than product lead times."
+                                           ,default=lambda self: fields.datetime.now())
 
-    def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()
-        for order in self:
-           if not order.commitment_date:
-               order.commitment_date = fields.datetime.now()
-        return res
+    
+   
 
-
+    
     @api.onchange('partner_id')
     def _onchange_partner_id_set_sale_rep(self):
         for order in self: 

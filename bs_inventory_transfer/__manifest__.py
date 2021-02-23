@@ -25,7 +25,10 @@
     'depends': ['base','stock','sale_stock','bs_sales'],
     # always loaded
     'data': [
+        'security/security_view.xml',
+        'security/ir.model.access.csv',
         'views/stock_picking_view.xml',
+        'report/pending_delivery_order_view.xml',
     ],
     
     'installable': True,

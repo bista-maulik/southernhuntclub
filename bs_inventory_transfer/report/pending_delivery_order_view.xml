@@ -8,10 +8,10 @@
                     <field name="sale_id" optional="hide"/>
                     <field name="partner_id" optional="hide"/>
                     <field name="product_id" />
-                    <field name="delivery_date" widget="remaining_days"/>
-                    <field name="on_hand_qty" />
-                    <field name="pending_qty" />
-                    <field name="available_qty" />
+                    <field name="pending_qty" optional="hide"/>
+                    <field name="delivery_date" widget="remaining_days" optional="hide"/>
+                    <field name="available_qty" optional="hide"/>
+                    <field name="on_hand_qty" optional="hide"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                 </tree>
             </field>

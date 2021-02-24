@@ -29,6 +29,7 @@
         'security/ir.model.access.csv',
         'views/stock_picking_view.xml',
         'report/pending_delivery_order_view.xml',
+        'report/report_delivery_slip.xml',
     ],
     
     'installable': True,

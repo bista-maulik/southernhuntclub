@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       <template id="customization_report_delivery_document_report_templates" inherit_id="stock.report_delivery_document">
+              <xpath expr="//t[@t-set='partner']" position="replace">
+                     <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or (o.company_id.partner_id) or False"/>
+              </xpath>
+              
+              <xpath expr="//t[@t-set='address']" position="replace">
+                            <strong groups="bs_sales.group_customer_address">Customer Address:</strong>
+                            <div groups="bs_sales.group_customer_address" t-esc="partner" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+              </xpath>
+              
+              <xpath expr="//tr[@t-foreach='lines']//span[@t-field='move.product_uom_qty']" position="replace">
+                     <span t-esc="move.set_product_quantity(move.product_uom_qty)"/> 
+              </xpath>
+
+       </template>
+</odoo>

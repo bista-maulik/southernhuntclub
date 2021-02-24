@@ -12,5 +12,9 @@
     </record>
  
 
+    <record id="group_customer_address" model="res.groups">
+        <field name="name">Customer Addresses (Report) </field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
 </data>
 </odoo>

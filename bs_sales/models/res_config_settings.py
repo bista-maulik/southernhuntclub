@@ -6,5 +6,9 @@
 #
 ##############################################################################
 
-from . import stock_picking
-from . import stock_move
+from odoo import api, fields, models
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    group_customer_address = fields.Boolean("Customer Addresses (Report)",implied_group='bs_sales.group_customer_address')

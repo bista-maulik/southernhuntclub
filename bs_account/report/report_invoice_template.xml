@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="customization_report_with_invoice_document_report_templates" inherit_id="account.report_invoice_document">
+       <xpath expr="//div[@t-if='o.partner_id.vat']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath> 
+ 
+        <xpath expr="//div[@t-field='o.partner_id']" position="replace">
+            <div t-field="o.partner_id"
+                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' 
+                groups="bs_sales.group_customer_address"/>
+        </xpath> 
+
+         <xpath expr="//div[@t-field='o.partner_id']" position="before">
+           <strong  groups="bs_sales.group_customer_address">Customer Address:</strong>
+        </xpath> 
+
+
+       
+       <xpath expr="//th[@name='th_taxes']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath> 
+        
+        <xpath expr="//t[@t-foreach='lines']//td[5]" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath> 
+
+ 
+         <xpath expr="//span[@t-field='line.quantity']" position="replace">
+            <span t-esc="line.set_product_quantity(line.quantity)"/>
+        </xpath> 
+
+         <xpath expr="//t[@t-set='address']//address[@t-field='o.partner_id']" position="replace">
+                             <address t-field="o.partner_id" 
+                              groups="bs_sales.group_customer_address" style="display: none;"
+                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+
+        </xpath> 
+
+
+ 
+    <xpath expr="//address" position="before">
+   <t t-if="not o.partner_shipping_id">
+
+        <t t-set="information_block">
+                    <div groups="sale.group_delivery_invoice_address">
+                        <strong>Shipping Address:</strong>
+                        <address t-field="o.partner_id" 
+                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                    </div>
+        </t>
+    </t>
+ </xpath>
+        </template>
+        </odoo>
+

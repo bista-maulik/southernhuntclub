@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="customization_sale_report_templates" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//div[@t-if='doc.user_id.name']" position="attributes">
+            <attribute name="t-att-style">'display: none;' if doc.user_id.name else ''</attribute>
+        </xpath> 
+        
+        <xpath expr="//div[@t-if='doc.user_id.name']" position="after">
+            <div t-if="doc.sales_rep.name" class="col-auto col-3 mw-100 mb-2">
+                <strong>Sales Rep:</strong>
+                <p class="m-0" t-field="doc.sales_rep"/>
+            </div>
+        </xpath> 
+
+        <xpath expr="//p[@t-if='doc.partner_id.vat']" position="attributes">
+            <attribute name="t-att-style">'display: none;' if doc.partner_id.vat else ''</attribute>
+        </xpath> 
+
+        <xpath expr="//table[@class='table table-sm o_main_table']//thead/tr/th[@name='th_taxes']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+
+        <xpath expr="//td[@name='td_taxes']" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+
+       
+        <xpath expr="//t[@t-set='address']//div[@t-field='doc.partner_id']" position="attributes">
+    <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+
+
+          <xpath expr="//strong[1][@t-if='doc.partner_shipping_id == doc.partner_invoice_id']" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+
+          <xpath expr="//strong[2][@t-if='doc.partner_shipping_id != doc.partner_invoice_id']" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+         <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='doc.partner_shipping_id != doc.partner_invoice_id']//strong[1]" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath>
+         <xpath expr="//div[@t-field='doc.partner_shipping_id']" position="attributes">
+             <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath> 
+
+
+         <xpath expr="//t[@t-set='address']" position="after">
+                <table  style="width: 100%;border:none;">
+                    <tr style="border:none;" groups="bs_sales.group_customer_address">
+                        <td > 
+                            <strong>Customer Address:</strong>
+                            <div t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr style="border:none;"  groups="sale.group_delivery_invoice_address">
+                        <td style="width:60%;">
+                            <t  t-if="doc.partner_invoice_id">
+                                <strong>Invoicing Address:</strong>
+                                <div t-field="doc.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            </t>
+                            
+                            <t t-if="not doc.partner_invoice_id">
+                                <strong>Invoicing Address:</strong>
+                                <div t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                            </t>
+                        </td>
+                        
+                        <td style="width:40%;"> 
+                            <t t-if="doc.partner_shipping_id">
+                                <strong>Shipping Address:</strong>
+                                <div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            </t>
+                            <t t-if="not doc.partner_shipping_id">
+                                <strong>Shipping Address:</strong>
+                                <div t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                            </t>
+                        </td>
+                    </tr>
+                </table> 
+
+        </xpath>
+
+
+
+   <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
+                <span t-esc="line.set_product_quantity(line.product_uom_qty)"/>
+
+        </xpath> 
+
+
+
+                <!-- 
+                    t-foreach="doc.order_line"
+                    <td name="td_quantity" class="text-right">
+                                    <span t-field="line.product_uom"/>
+                                </td> -->
+
+    </template>
+</odoo>

@@ -46,3 +46,17 @@ class SaleOrder(models.Model):
         return res
 
         
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    def set_product_quantity(self,qty):
+        qty_data=str(qty)
+        qty_data1 = str(qty).split('.')[1]
+        qty_data2 = str(qty).split('.')[0]
+        if int(qty_data1) ==0:
+            return qty_data2
+        else:
+            return qty_data
+       
+       
+

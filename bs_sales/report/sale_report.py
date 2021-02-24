@@ -1,15 +1,19 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+# Bista Solutions Pvt. Ltd
+# Copyright (C) 2020 (http://www.bistasolutions.com)
+#
+##############################################################################
 
 from odoo import tools
 from odoo import api, fields, models
-
 
 class SaleReport(models.Model):
     _inherit = "sale.report"
     
     sales_rep = fields.Many2one('sales.rep',string='Sales Rep', readonly=True)
     commitment_date = fields.Datetime('Delivery Date', readonly=True)
-
-
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['sales_rep'] = ", s.sales_rep as sales_rep"

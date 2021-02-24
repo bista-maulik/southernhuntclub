@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <template id="custom_web_external_layout_clean_inherit" inherit_id="web.external_layout_clean">
+        <xpath expr="//li[@t-if='company.vat']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+            <!-- <li t-if="vat or company.vat"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-esc="vat or company.vat"/></li> -->
+        </xpath>
+    </template>
+
     <template id="customization_sale_report_templates" inherit_id="sale.report_saleorder_document">
 
         <xpath expr="//div[@t-if='doc.user_id.name']" position="attributes">

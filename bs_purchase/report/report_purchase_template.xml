@@ -12,6 +12,26 @@
         <xpath expr="//t[@ t-foreach='o.order_line']//span[@t-field='line.product_qty']" position="replace">
             <span t-esc="line.set_product_quantity(line.product_qty)"/>
         </xpath>
+        
+        <!-- <xpath expr="//t[@t-set='address']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>    
+        </xpath>
+
+         <xpath expr="//t[@t-set='address']//div[@t-field='o.partner_id']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+               
+        </xpath>
+         
+         <xpath expr="//t[@t-set='address']//p[@t-if='o.partner_id.vat']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+               
+        </xpath>
+
+        <xpath expr="//t[@t-set='information_block']//div[@t-field='o.dest_address_id']" position="attributes">
+            <attribute name="t-att-style">'display: none;'</attribute>
+        </xpath> -->
+
+
 
     </template>
 </odoo>

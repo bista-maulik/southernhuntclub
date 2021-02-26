@@ -59,13 +59,13 @@
 
          <xpath expr="//t[@t-set='address']" position="after">
                 <table  style="width: 100%;border:none;">
-                    <tr style="border:none;" groups="bs_sales.group_customer_address">
+                    <!-- <tr style="border:none;" groups="bs_sales.group_customer_address">
                         <td > 
                             <strong>Customer Address:</strong>
                             <div t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
                         </td>
                         <td></td>
-                    </tr>
+                    </tr> -->
                     <tr style="border:none;"  groups="sale.group_delivery_invoice_address">
                         <td style="width:60%;">
                             <t  t-if="doc.partner_invoice_id">

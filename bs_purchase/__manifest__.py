@@ -25,7 +25,7 @@
     'depends': ['base','purchase','bs_sales'],
     # always loaded
     'data': [
-   
+        'views/purchase_order_view.xml',
         'report/report_purchase_template.xml',
         
 

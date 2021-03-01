@@ -10,14 +10,13 @@
             </xpath>
 
             <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="before">
-                <!-- <field name="is_a_customer" widget="checkbox"/> -->
-                <field name="sales_rep" /> 
-                <!-- attrs="{'required': [('is_a_customer', '=', True)],'invisible': [('is_a_customer', '!=', True)]}"/> -->
+                <field name="is_a_customer" widget="checkbox"/>
+                <field name="sales_rep" attrs="{'required': [('is_a_customer', '=', True)],'invisible': [('is_a_customer', '!=', True)]}"/>
             </xpath>
-<!-- 
+
             <xpath expr="//page[@name='sales_purchases']//field[@name='property_supplier_payment_term_id']" position="before">
                 <field name="is_a_vendor" widget="checkbox"/>
-            </xpath> -->
+            </xpath>
 
         </field>
     </record>
@@ -33,8 +32,8 @@
             </xpath>
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="sales_rep" optional="hide" />
-                <!-- <field name="is_a_customer" optional="hide"/>
-                <field name="is_a_vendor" optional="hide"/> -->
+                <field name="is_a_customer" optional="hide"/>
+                <field name="is_a_vendor" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -49,8 +48,8 @@
             </xpath>
             <xpath expr="//filter[@name='salesperson']" position="after">
                 <filter string="Sales Rep" name="sales_rep" domain="[]" context="{'group_by': 'sales_rep'}"/>
-                <!-- <filter string="Customer" name="is_a_customer" domain="[]" context="{'group_by': 'is_a_customer'}"/>
-                 <filter string="Vendor" name="is_a_vendor" domain="[]" context="{'group_by': 'is_a_vendor'}"/> -->
+                 <filter string="Customer" name="is_a_customer" domain="[]" context="{'group_by': 'is_a_customer'}"/>
+                 <filter string="Vendor" name="is_a_vendor" domain="[]" context="{'group_by': 'is_a_vendor'}"/>
             </xpath>
         </field>
     </record>

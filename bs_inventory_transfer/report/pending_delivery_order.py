@@ -39,15 +39,19 @@ class PendingDeliveryOrderReport(models.Model):
     product_id = fields.Many2one('product.product', 'Product', readonly=True,index=True)
     delivery_date = fields.Datetime('Delivery Date', readonly=True,index=True)
     pending_qty = fields.Float('Pending Qty.', readonly=True,index=True)
-    on_hand_qty = fields.Float(related='product_id.qty_available',string='On Hand Qty.')
-    available_qty = fields.Float(related='product_id.virtual_available',string='Available Qty.')
+    
+    # # # # # # on_hand_qty = fields.Float(related='product_id.qty_available',string='On Hand Qty.')
+    # # # # # # available_qty = fields.Float(related='product_id.virtual_available',string='Available Qty.')
+    on_hand_qty = fields.Float(string='On Hand Qty.')
+    available_qty = fields.Float(string='Available Qty.')
 
     company_id = fields.Many2one('res.company', 'Company', readonly=True,index=True)
     move_id = fields.Many2one('stock.move', 'MoveId', readonly=True,index=True)
    
     product_qty = fields.Float(related='move_id.forecast_availability',string='Reserved Qty.', readonly=True,index=True)
 
-
+   
+    
 
 
     def _select(self):
@@ -72,6 +76,9 @@ class PendingDeliveryOrderReport(models.Model):
                 ,sm.product_qty
                 ,sm.company_id as company_id
                 ,sm.id as move_id
+               ,(select quantity from stock_quant where (location_id=sp.location_id and company_id=sm.company_id) and product_id=sm.product_id) as on_hand_qty
+                ,(select (quantity - reserved_quantity) from stock_quant where (location_id=sp.location_id and company_id=sm.company_id) and product_id=sm.product_id) as available_qty
+
                  """
 
     def _from(self):
@@ -115,6 +122,7 @@ class PendingDeliveryOrderReport(models.Model):
             --,sq.reserved_quantity
             ,sm.product_qty
             ,sm.id
+            ,sp.location_id
          """
 
     def init(self):

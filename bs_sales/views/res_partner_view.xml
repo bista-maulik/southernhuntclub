@@ -33,8 +33,8 @@
             </xpath>
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="sales_rep" optional="hide" />
-                <!-- <field name="is_a_customer" optional="hide"/>
-                <field name="is_a_vendor" optional="hide"/> -->
+                <field name="is_a_customer" optional="hide"/>
+                <field name="is_a_vendor" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -49,8 +49,8 @@
             </xpath>
             <xpath expr="//filter[@name='salesperson']" position="after">
                 <filter string="Sales Rep" name="sales_rep" domain="[]" context="{'group_by': 'sales_rep'}"/>
-                <!-- <filter string="Customer" name="is_a_customer" domain="[]" context="{'group_by': 'is_a_customer'}"/>
-                 <filter string="Vendor" name="is_a_vendor" domain="[]" context="{'group_by': 'is_a_vendor'}"/> -->
+                <filter string="Customer" name="is_a_customer" domain="[]" context="{'group_by': 'is_a_customer'}"/>
+                 <filter string="Vendor" name="is_a_vendor" domain="[]" context="{'group_by': 'is_a_vendor'}"/>
             </xpath>
         </field>
     </record>

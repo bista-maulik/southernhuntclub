@@ -10,13 +10,14 @@
             </xpath>
 
             <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="before">
-                <field name="is_a_customer" widget="checkbox"/>
-                <field name="sales_rep" attrs="{'required': [('is_a_customer', '=', True)],'invisible': [('is_a_customer', '!=', True)]}"/>
+                <!-- <field name="is_a_customer" widget="checkbox"/> -->
+                <field name="sales_rep" /> 
+                <!-- attrs="{'required': [('is_a_customer', '=', True)],'invisible': [('is_a_customer', '!=', True)]}"/> -->
             </xpath>
-
+<!-- 
             <xpath expr="//page[@name='sales_purchases']//field[@name='property_supplier_payment_term_id']" position="before">
                 <field name="is_a_vendor" widget="checkbox"/>
-            </xpath>
+            </xpath> -->
 
         </field>
     </record>

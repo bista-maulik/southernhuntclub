@@ -13,7 +13,9 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     sales_rep = fields.Many2one('sales.rep',string='Sales Rep',required=True,tracking=1)
-    
+    is_a_customer = fields.Boolean(string="Is a Customer", default=True,  help="Check this box if this contact is a customer.")
+    is_a_vendor = fields.Boolean(string="Is a Vendor",help="Check this box if this contact is a vendor. ")
+
     @api.model
     def fields_get(self, fields=None):
         hide = ['user_id']

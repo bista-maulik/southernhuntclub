@@ -22,12 +22,13 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','mrp','mrp_workorder'],
+    'depends': ['mrp','mrp_workorder'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'security/security_view.xml',
         'views/storage_type_view.xml',
+        'views/product_view.xml',
         'views/mrp_bom_view.xml',
         'views/mrp_production_view.xml',
         'report/mrp_production_templates.xml',

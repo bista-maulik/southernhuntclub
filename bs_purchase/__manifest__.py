@@ -22,14 +22,12 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','purchase','bs_sales'],
+    'depends': ['purchase','bs_sales'],
     # always loaded
     'data': [
         'views/purchase_order_view.xml',
+        'views/res_partner_view.xml',
         'report/report_purchase_template.xml',
-        
-
-        
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

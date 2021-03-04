@@ -22,11 +22,12 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','stock','sale_stock','bs_sales'],
+    'depends': ['sale_stock','bs_sales'],
     # always loaded
     'data': [
         'security/security_view.xml',
         'security/ir.model.access.csv',
+        'views/product_view.xml',
         'views/stock_picking_view.xml',
         'report/pending_delivery_order_view.xml',
         'report/report_delivery_slip.xml',

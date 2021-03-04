@@ -122,6 +122,7 @@ class PendingDeliveryOrderReport(models.Model):
          """
 
     def init(self):
+        self._cr.execute("DROP view IF EXISTS %s CASCADE" % (self._table))
         self._cr.execute("""
             CREATE OR REPLACE VIEW %s AS (
                 %s

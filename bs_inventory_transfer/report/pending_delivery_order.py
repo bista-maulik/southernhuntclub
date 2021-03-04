@@ -62,10 +62,7 @@ class PendingDeliveryOrderReport(models.Model):
                 ,case when so.partner_id notnull then so.partner_id else sp.partner_id end as "partner_id"
                 ,sm.product_id as product_id
                 --,(sml.product_uom_qty-sml.qty_done) as pending_qty
-                , case 
-                    when (sml.product_uom_qty-sml.qty_done) != 0 then (sml.product_uom_qty-sml.qty_done)
-                    else sm.product_uom_qty  end as pending_qty
-                
+                ,sm.product_uom_qty as pending_qty
                 ,sm.date_deadline as delivery_date
                -- ,(sq.quantity - sq.reserved_quantity) as available_qty
                 --,sq.quantity as on_hand_qty

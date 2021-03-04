@@ -84,4 +84,9 @@
         </field>
     </record>
 
+    <!-- Inherit the product action to set default the list view-->
+    <record id="sale.product_template_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form,activity</field>
+        <field name="view_id"></field>
+    </record>
 </odoo>

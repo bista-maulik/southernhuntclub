@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit the product action to set default list view-->
+    <record id="mrp.product_template_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <!-- Inherit the product variants action to set default list view-->
+    <record id="mrp.mrp_product_variant_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+</odoo>

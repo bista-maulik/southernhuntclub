@@ -47,4 +47,21 @@
             </xpath>
         </field>
     </record>
+
+    <!-- Inherit the partner action to set default list view-->
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <!-- Inherit the partner action view  to change the sequence for
+     default list view-->
+    <record id="base.action_partner_form_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+    </record>
+
+     <!-- Inherit the partner action view  to change the sequence for
+     default list view-->
+    <record id="base.action_partner_tree_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+    </record>
 </odoo>

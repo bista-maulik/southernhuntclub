@@ -40,14 +40,13 @@ class PendingDeliveryOrderReport(models.Model):
     delivery_date = fields.Datetime('Delivery Date', readonly=True,index=True)
     pending_qty = fields.Float('Pending Qty.', readonly=True,index=True)
     
-    # # # # # # on_hand_qty = fields.Float(related='product_id.qty_available',string='On Hand Qty.')
-    # # # # # # available_qty = fields.Float(related='product_id.virtual_available',string='Available Qty.')
+    # on_hand_qty = fields.Float(related='product_id.qty_available',string='On Hand Qty.')
+    # available_qty = fields.Float(related='product_id.virtual_available',string='Available Qty.')
     on_hand_qty = fields.Float(string='On Hand Qty.',  group_operator='avg')
     # available_qty = fields.Float(string='Available Qty.')
 
     company_id = fields.Many2one('res.company', 'Company', readonly=True,index=True)
     move_id = fields.Many2one('stock.move', 'MoveId', readonly=True,index=True)
-   
     # product_qty = fields.Float(related='move_id.forecast_availability',string='Reserved Qty.', readonly=True,index=True)
 
     def _select(self):
@@ -108,8 +107,8 @@ class PendingDeliveryOrderReport(models.Model):
             ,sp.partner_id
             ,sp.name
             ,sm.state
-            ,sml.product_uom_qty
-            ,sml.qty_done
+            --,sml.product_uom_qty
+            --,sml.qty_done
             ,sp.picking_type_id
             --,sq.quantity
             --,sq.reserved_quantity

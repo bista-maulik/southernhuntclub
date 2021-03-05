@@ -3,23 +3,26 @@
     <record id="res_partner_view_sales_rep" model="ir.ui.view">
         <field name="name">res.partner.view.sales.rep</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-
             <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="before">
                 <field name="customer_rank" invisible="1"/>
                 <field name="sales_rep" attrs="{'required': [('customer_rank', '>', 0)]}" />
             </xpath>
-
-           
-
+            <group name="sale" position="inside">
+                <field name="industry_id"
+                       attrs="{'invisible': [('is_company', '=', False)]}"
+                       options="{'no_create': True}"/>
+            </group>
+            <xpath expr="//page[@name='sales_purchases']/group/group[@name='misc']/field[@name='industry_id']"
+                   position="replace">
+            </xpath>
         </field>
     </record>
-
-
+    
     <record id="res_partner_view_tree_inherit_hide_fields" model="ir.ui.view">
         <field name="name">res.partner.view.tree.inherit.hide.fields</field>
         <field name="model">res.partner</field>

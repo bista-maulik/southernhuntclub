@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_workcenter_form_view_inherit_id" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.inherit</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='costing']" position="after">
+                <group string="Accounts" name="cost_accounts">
+                    <field name="wip_account_id" required="1" options="{'no_create': 1, 'no_create_edit': 1}"/>
+                    <field name="labour_account_id" required="1" options="{'no_create': 1, 'no_create_edit': 1}"/>
+                    <field name="product_id" options="{'no_create': 1, 'no_create_edit': 1}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="mrp_production_form_view_sd_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.form.sd.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_mo_delivery']" position="after">
+                <button class="oe_stat_button" name="redirect_to_account_move" type="object" icon="fa-pencil-square-o"
+                        attrs="{'invisible': [('count_journal_entries', '=', 0)]}">
+                    <field name="count_journal_entries" widget="statinfo" string="Journal Entries"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

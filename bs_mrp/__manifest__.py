@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['mrp','mrp_workorder'],
+    'depends': ['mrp_workorder', 'mrp_account'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',

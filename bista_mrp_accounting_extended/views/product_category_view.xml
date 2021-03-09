@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_category_property_form_mrp_accounting_extended" model="ir.ui.view">
+        <field name="name">view.category.property.form.mrp.accounting.extended</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock_account.view_category_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_stock_account_output_categ_id']" position="after">
+                <field name="property_mrp_stock_account_input_categ_id" />
+                <field name="property_mrp_stock_account_output_categ_id" attrs="{'required':[ ('property_mrp_stock_account_input_categ_id', '!=', False)]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

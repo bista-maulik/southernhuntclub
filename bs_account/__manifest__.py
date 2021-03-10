@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','account','bs_sales'],
+    'depends': ['bs_sales'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',

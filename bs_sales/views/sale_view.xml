@@ -1,12 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
-    
-
     <record id="sales_order_view_sales_rep_inher" model="ir.ui.view">
         <field name="name">sale.order.form.sales.rep</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='other_information']//field[@name='user_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -17,21 +14,30 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="sales_rep"  required="1" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
             </xpath>
-
-             
-            
             <xpath expr="//field[@name='show_update_pricelist']" position="before">
                 <label for="commitment_date" string="Delivery Date"/>
                 <div name="commitment_date_div_custom" class="o_row" >
                     <field name="commitment_date" />
                 </div>
                 <field name="cancellation_date"  attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
-
             </xpath>
+            <page name="customer_signature" position="attributes">
+                <attribute name="groups">bs_sales.group_show_customer_signature</attribute>
+            </page>
         </field>
     </record>
-    
-  
+
+    <!-- Inherit view to set group in optional product page in sale order-->
+    <record id="view_sale_order_form_quote_hide_optional_products" model="ir.ui.view">
+        <field name="name">sale.order.form.view.hide.optional.product</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <page name="optional_products" position="attributes">
+                <attribute name="groups">bs_sales.group_show_optional_product_page</attribute>
+            </page>
+        </field>
+    </record>
 
     <record id="view_quotation_tree_sales_rep_inherit" model="ir.ui.view">
         <field name="name">sale.order.tree.quotation.inherit.sales.rep</field>

@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['sale','crm'],
+    'depends': ['sale_management','crm', 'sale_stock'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
@@ -34,9 +34,6 @@
         'report/res_config_settings_views.xml',
         'report/sale_report_view.xml',
         'report/sale_report_templates.xml',
-        
-
-        
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

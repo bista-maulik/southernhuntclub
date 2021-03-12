@@ -12,7 +12,7 @@
     'category': 'Accounting',
     'author': 'Bista Solutions Pvt. Ltd.',
     "website": "http://www.bistasolutions.com",
-    'depends': ['base', 'mrp', 'stock_account'],
+    'depends': ['mrp_account'],
     'description': """ 
 MRP Accounting Extended
 =============================

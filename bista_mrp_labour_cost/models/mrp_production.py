@@ -13,17 +13,17 @@ from odoo.exceptions import UserError
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
-    def get_count_journal_entries(self):
-        """
-        Define compute function which calculate the account move which set the
-        production.
-        :return:
-        """
-        for record in self:
-            move_ids = self.env['account.move'].search([('production_id', '=', record.id)])
-            record.count_journal_entries = len(move_ids.ids)
-
-    count_journal_entries = fields.Integer(compute='get_count_journal_entries', string='Count Journal Entries')
+    # def get_count_journal_entries(self):
+    #     """
+    #     Define compute function which calculate the account move which set the
+    #     production.
+    #     :return:
+    #     """
+    #     for record in self:
+    #         move_ids = self.env['account.move'].search([('production_id', '=', record.id)])
+    #         record.count_journal_entries = len(move_ids.ids)
+    #
+    # count_journal_entries = fields.Integer(compute='get_count_journal_entries', string='Count Journal Entries')
 
     def _post_inventory(self, cancel_backorder=False):
         """
@@ -91,19 +91,32 @@ class MrpProduction(models.Model):
                     wc_account_move._post(soft=False)
         return super(MrpProduction, self)._post_inventory(cancel_backorder=cancel_backorder)
 
-    def redirect_to_account_move(self):
+    # Comment the function
+
+    # def redirect_to_account_move(self):
+    #     """
+    #     Define the function which redirect you in journal entry which created
+    #     for the manufacturing order.
+    #     :return:
+    #     """
+    #     [action] = self.env.ref('account.action_move_journal_line').sudo().read()
+    #     for order in self:
+    #         context = self._context.copy()
+    #         action['domain'] = [('production_id', '=', order.id)]
+    #         context.update({'create': False})
+    #         action['context'] = context
+    #         return action
+
+    def get_journal_entry_domain(self):
         """
-        Define the function which redirect you in journal entry which created
-        for the manufacturing order.
-        :return:
+        Override the function for update the domain for get journal entries.
+        :return: domain
         """
-        [action] = self.env.ref('account.action_move_journal_line').sudo().read()
-        for order in self:
-            context = self._context.copy()
-            action['domain'] = [('production_id', '=', order.id)]
-            context.update({'create': False})
-            action['context'] = context
-            return action
+        domain = ['|', ('production_id', '=', self.id)]
+        root_domain = super(MrpProduction, self).get_journal_entry_domain()
+        if root_domain:
+            domain.extend(root_domain)
+        return domain
 
 
 class AccountMove(models.Model):

@@ -16,9 +16,10 @@
     'description': """
         Creates the Journal entry for individul workorder cost with corresponding employee
     """,
-    'depends': ['mrp_account'],
+    'depends': ['bista_mrp_accounting_extended'],
     'data': [
             'views/mrp_workcenter_view.xml'
     ],
     'installable': True,
+    'auto_install': True
 }

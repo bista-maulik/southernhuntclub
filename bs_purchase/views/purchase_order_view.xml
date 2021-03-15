@@ -22,4 +22,10 @@
             model="ir.actions.act_window">
         <field name="view_mode">tree,kanban,form,activity</field>
     </record>
+
+    <!-- Inherit the purchase reporting menu to add user access-->
+    <record id="purchase.purchase_report" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6, 0, [ref('purchase.group_purchase_user')])]"/>
+    </record>
 </odoo>

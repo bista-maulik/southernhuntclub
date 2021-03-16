@@ -39,6 +39,20 @@
         </field>
     </record>
 
+    <!-- Inherit view to change the warehouse fied position in sale order-->
+    <record id="view_sale_stock_form_change_warehouse_position" model="ir.ui.view">
+        <field name="name">sale.stock.form.change.warehouse.position</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="replace">
+            </field>
+            <xpath expr="//sheet/group/group[@name='partner_details']" position="inside">
+                <field name="warehouse_id" options="{'no_create': True}" groups="stock.group_stock_multi_warehouses" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+
     <record id="view_quotation_tree_sales_rep_inherit" model="ir.ui.view">
         <field name="name">sale.order.tree.quotation.inherit.sales.rep</field>
         <field name="model">sale.order</field>

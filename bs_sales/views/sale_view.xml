@@ -1,12 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
-    
-
     <record id="sales_order_view_sales_rep_inher" model="ir.ui.view">
         <field name="name">sale.order.form.sales.rep</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='other_information']//field[@name='user_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -17,21 +14,44 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="sales_rep"  required="1" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
             </xpath>
-
-             
-            
             <xpath expr="//field[@name='show_update_pricelist']" position="before">
                 <label for="commitment_date" string="Delivery Date"/>
                 <div name="commitment_date_div_custom" class="o_row" >
                     <field name="commitment_date" />
                 </div>
                 <field name="cancellation_date"  attrs="{'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+            </xpath>
+            <page name="customer_signature" position="attributes">
+                <attribute name="groups">bs_sales.group_show_customer_signature</attribute>
+            </page>
+        </field>
+    </record>
 
+    <!-- Inherit view to set group in optional product page in sale order-->
+    <record id="view_sale_order_form_quote_hide_optional_products" model="ir.ui.view">
+        <field name="name">sale.order.form.view.hide.optional.product</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <page name="optional_products" position="attributes">
+                <attribute name="groups">bs_sales.group_show_optional_product_page</attribute>
+            </page>
+        </field>
+    </record>
+
+    <!-- Inherit view to change the warehouse fied position in sale order-->
+    <record id="view_sale_stock_form_change_warehouse_position" model="ir.ui.view">
+        <field name="name">sale.stock.form.change.warehouse.position</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="replace">
+            </field>
+            <xpath expr="//sheet/group/group[@name='partner_details']" position="inside">
+                <field name="warehouse_id" options="{'no_create': True}" groups="stock.group_stock_multi_warehouses" force_save="1"/>
             </xpath>
         </field>
     </record>
-    
-  
 
     <record id="view_quotation_tree_sales_rep_inherit" model="ir.ui.view">
         <field name="name">sale.order.tree.quotation.inherit.sales.rep</field>
@@ -88,5 +108,17 @@
     <record id="sale.product_template_action" model="ir.actions.act_window">
         <field name="view_mode">tree,kanban,form,activity</field>
         <field name="view_id"></field>
+    </record>
+
+    <!-- Inherit the sale reporting menu to add user access-->
+    <record id="sale.menu_sale_report" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6, 0, [ref('sales_team.group_sale_salesman')])]"/>
+    </record>
+
+    <!-- Inherit the crm reporting menu to add user access-->
+    <record id="crm.crm_menu_report" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6, 0, [ref('sales_team.group_sale_salesman')])]"/>
     </record>
 </odoo>

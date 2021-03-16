@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['sale_stock','bs_sales'],
+    'depends': ['bs_sales'],
     # always loaded
     'data': [
         'security/security_view.xml',

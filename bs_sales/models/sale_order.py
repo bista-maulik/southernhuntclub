@@ -7,9 +7,6 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError
-# from datetime import datetime, timedelta
-from datetime import datetime
 
 
 
@@ -25,10 +22,17 @@ class SaleOrder(models.Model):
                                            "this date rather than product lead times."
                                            ,default=lambda self: fields.datetime.now())
 
-    
-   
+    @api.model
+    def default_get(self, fields):
+        """
+        Override function to change the picking policy value.
+        :param fields:
+        :return:
+        """
+        res = super(SaleOrder, self).default_get(fields)
+        res['picking_policy'] = 'one'
+        return res
 
-    
     @api.onchange('partner_id')
     def _onchange_partner_id_set_sale_rep(self):
         for order in self: 
@@ -57,6 +61,3 @@ class SaleOrderLine(models.Model):
             return qty_data2
         else:
             return qty_data
-       
-       
-

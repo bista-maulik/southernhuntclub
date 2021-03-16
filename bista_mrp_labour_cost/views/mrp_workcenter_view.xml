@@ -14,17 +14,20 @@
             </xpath>
         </field>
     </record>
-    <record id="mrp_production_form_view_sd_inherit" model="ir.ui.view">
-        <field name="name">mrp.production.form.sd.inherit</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_view_mo_delivery']" position="after">
-                <button class="oe_stat_button" name="redirect_to_account_move" type="object" icon="fa-pencil-square-o"
-                        attrs="{'invisible': [('count_journal_entries', '=', 0)]}">
-                    <field name="count_journal_entries" widget="statinfo" string="Journal Entries"/>
-                </button>
-            </xpath>
-        </field>
-    </record>
+
+<!-- Comment the smart button because merge the entry-->
+
+<!--    <record id="mrp_production_form_view_sd_inherit" model="ir.ui.view">-->
+<!--        <field name="name">mrp.production.form.sd.inherit</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='action_view_mo_delivery']" position="after">-->
+<!--                <button class="oe_stat_button" name="redirect_to_account_move" type="object" icon="fa-pencil-square-o"-->
+<!--                        attrs="{'invisible': [('count_journal_entries', '=', 0)]}">-->
+<!--                    <field name="count_journal_entries" widget="statinfo" string="Journal Entries"/>-->
+<!--                </button>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
 </odoo>

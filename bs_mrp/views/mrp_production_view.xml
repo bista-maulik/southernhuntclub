@@ -17,10 +17,9 @@
         <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
         <field name="arch" type="xml">
             <filter name="filter_confirmed" position="after">
-                <filter string="Unplaned MO" name="filter_unplan_mo"
+                <filter string="Unplanned" name="filter_unplan_mo"
                         domain="[('state', '=', 'confirmed'), ('is_planned', '!=', True)]"/>
             </filter>
         </field>
     </record>
 </odoo>
-   

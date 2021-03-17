@@ -15,7 +15,7 @@
 
         <!-- Define Groups for delivery type filtration in inventory overview-->
         <record id="group_warehouse_ohio" model="res.groups">
-            <field name="name">RGTC - Ohio</field>
+            <field name="name">RTGC - Ohio</field>
             <field name="category_id" ref="base.module_category_hidden"/>
         </record>
 

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_picking_form_inherited_custom" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherite.custom1</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='scheduled_date']" position="before">
+                <label for="date_order"/>
+                <div class="o_row">
+                    <field name="date_order" />
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="before">
+                <label for="cancellation_date"/>
+                <div class="o_row">
+                    <field name="cancellation_date" />
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="replace">
+                <field name="date_deadline" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="date_deadline" attrs="{'invisible': ['|', ('state', 'in', ('done', 'cancel')), ('date_deadline', '=', False)]}" decoration-danger="date_deadline and date_deadline &lt; current_date" decoration-bf="date_deadline and date_deadline &lt; current_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="vpicktree_inherit_dates_added_custom" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit.dates.custom</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="cancellation_date" optional="hide"  widget="remaining_days"/>
+            </xpath>
+
+            <xpath expr="//field[@name='scheduled_date']" position="before">
+                <field name="date_order" optional="hide"  widget="remaining_days"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit the Inventory reporting menu to add user access-->
+    <record id="stock.menu_warehouse_report" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+    </record>
+</odoo>

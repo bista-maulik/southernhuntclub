@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.rule" id="pending_delivery_orders_report_comp_rule">
+            <field name="name">Pending Delivery Orders Report Analysis multi-company</field>
+            <field name="model_id" ref="model_pending_delivery_orders_report"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Define Groups for delivery type filtration in inventory overview-->
+        <record id="group_warehouse_memphis" model="res.groups">
+            <field name="name">RTGC - Memphis</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <!-- Define Groups for delivery type filtration in inventory overview-->
+        <record id="group_warehouse_ohio" model="res.groups">
+            <field name="name">RTGC - Ohio</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="ir_rule_picking_type_warehouse_memphis" model="ir.rule">
+            <field name="name">Warehouse RTGC - Memphis</field>
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field name="groups"
+                   eval="[(4, ref('bs_inventory_transfer.group_warehouse_memphis'))]"/>
+            <field name="domain_force">[('warehouse_id', '=', 3)]</field>
+        </record>
+
+        <record id="ir_rule_picking_type_warehouse_ohio" model="ir.rule">
+            <field name="name">Warehouse RTGC - Ohio</field>
+            <field name="model_id" ref="stock.model_stock_picking_type"/>
+            <field name="groups"
+                   eval="[(4, ref('bs_inventory_transfer.group_warehouse_ohio'))]"/>
+            <field name="domain_force">[('warehouse_id', '=', 4)]</field>
+        </record>
+    </data>
+</odoo>

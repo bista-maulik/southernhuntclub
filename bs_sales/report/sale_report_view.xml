@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="sale_report_search_inherit_sales_report" model="ir.ui.view">
+        <field name="name">sale.report.search.inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='User']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        
+            <xpath expr="//filter[@name='User']" position="before">
+                <filter string="Sales Rep" name="sales_rep" domain="[]" context="{'group_by': 'sales_rep'}"/>
+            </xpath>
+        
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="commitment_date"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='date']" position="after">
+                <filter string="Delivery Date" name="commitment_date" domain="[]" context="{'group_by': 'commitment_date'}"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='filter_date']" position="after">
+                <filter name="filter_commitment_date" date="commitment_date" default_period="this_month"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+
+</odoo>

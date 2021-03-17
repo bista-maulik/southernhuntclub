@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_partner_view_sales_rep" model="ir.ui.view">
+        <field name="name">res.partner.view.sales.rep</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="before">
+                <field name="customer_rank" invisible="1"/>
+                <field name="sales_rep" attrs="{'required': [('customer_rank', '>', 0)]}" />
+            </xpath>
+            <group name="sale" position="inside">
+                <field name="industry_id"
+                       attrs="{'invisible': [('is_company', '=', False)]}"
+                       options="{'no_create': True}"/>
+            </group>
+            <xpath expr="//page[@name='sales_purchases']/group/group[@name='misc']/field[@name='industry_id']"
+                   position="replace">
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="res_partner_view_tree_inherit_hide_fields" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.hide.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="sales_rep" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter_inherit_hide_salesperson_filter" model="ir.ui.view">
+        <field name="name">view.res.partner.filter.inherit.hide.salesperson.filter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='salesperson']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Sales Rep" name="sales_rep" domain="[]" context="{'group_by': 'sales_rep'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit the partner action to set default list view-->
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <!-- Inherit the partner action view  to change the sequence for
+     default list view-->
+    <record id="base.action_partner_form_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+    </record>
+
+     <!-- Inherit the partner action view  to change the sequence for
+     default list view-->
+    <record id="base.action_partner_tree_view1" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+    </record>
+</odoo>

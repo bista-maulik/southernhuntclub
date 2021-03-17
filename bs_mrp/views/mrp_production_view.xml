@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="mrp_production_form_view_inherited_storage_type" model="ir.ui.view">
+        <field name="name">mrp.production.view.inherited.storage.type</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bom_id']" position="after">
+                <field name="storage_type" readonly="1" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter_add_unplan_mo" model="ir.ui.view">
+        <field name="name">mrp.production.search.view.add.unplan.mo</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="arch" type="xml">
+            <filter name="filter_confirmed" position="after">
+                <filter string="Unplanned" name="filter_unplan_mo"
+                        domain="[('state', '=', 'confirmed'), ('is_planned', '!=', True)]"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

@@ -35,6 +35,7 @@ class PendingDeliveryOrderReport(models.Model):
                 
     picking_type_id = fields.Many2one('stock.picking.type', 'Operation Type',readonly=True,index=True)
     sale_id = fields.Many2one('sale.order','Sales Ord. #', readonly=True,index=True)
+    sale_price = fields.Float(string="Price", readonly=True, index=True)
     partner_id = fields.Many2one('res.partner', 'Customer', readonly=True,index=True)
     product_id = fields.Many2one('product.product', 'Product', readonly=True,index=True)
     delivery_date = fields.Datetime('Delivery Date', readonly=True,index=True)
@@ -57,6 +58,7 @@ class PendingDeliveryOrderReport(models.Model):
                 ,sm.state as state
                 ,sp.picking_type_id as picking_type_id
                 ,sp.sale_id as sale_id
+                ,sol.price_subtotal as sale_price
                 --,so.partner_id as partner_id
                 ,case when so.partner_id notnull then so.partner_id else sp.partner_id end as "partner_id"
                 ,sm.product_id as product_id
@@ -96,6 +98,7 @@ class PendingDeliveryOrderReport(models.Model):
          group by 
             sq.product_id
             ,sm.product_id
+            ,sol.id
             ,sm.date_deadline
             ,sm.product_uom_qty
             ,sm.picking_type_id

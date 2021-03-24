@@ -35,7 +35,7 @@ class PendingDeliveryOrderReport(models.Model):
                 
     picking_type_id = fields.Many2one('stock.picking.type', 'Operation Type',readonly=True,index=True)
     sale_id = fields.Many2one('sale.order','Sales Ord. #', readonly=True,index=True)
-    sale_price = fields.Float(string="Price", readonly=True, index=True)
+    sale_price = fields.Monetary(string="Price", readonly=True, index=True)
     partner_id = fields.Many2one('res.partner', 'Customer', readonly=True,index=True)
     product_id = fields.Many2one('product.product', 'Product', readonly=True,index=True)
     delivery_date = fields.Datetime('Delivery Date', readonly=True,index=True)
@@ -47,6 +47,8 @@ class PendingDeliveryOrderReport(models.Model):
     # available_qty = fields.Float(string='Available Qty.')
 
     company_id = fields.Many2one('res.company', 'Company', readonly=True,index=True)
+    currency_id = fields.Many2one(related='company_id.currency_id',
+                                  string='Company Currency')
     move_id = fields.Many2one('stock.move', 'MoveId', readonly=True,index=True)
     # product_qty = fields.Float(related='move_id.forecast_availability',string='Reserved Qty.', readonly=True,index=True)
 

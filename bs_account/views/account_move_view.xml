@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit the account move form view to add payment term in other info page-->
+    <record id="view_account_move_form_add_payment_terms" model="ir.ui.view">
+        <field name="name">account.move.form.view.add.payment.terms</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@id='other_tab']/group/group[@name='sale_info_group']/field[@name='invoice_origin']"
+                   position="after">
+                <field name="invoice_payment_term_id" readonly="1" force_save="1"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

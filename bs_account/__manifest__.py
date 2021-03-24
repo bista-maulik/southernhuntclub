@@ -25,17 +25,8 @@
     'depends': ['bs_sales'],
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        # 'security/security_view.xml',
-        # 'views/sales_rep_view.xml',
-        # 'views/res_partner_view.xml',
-        # 'views/sale_view.xml',
-        # 'report/res_config_settings_views.xml',
-        # 'report/sale_report_view.xml',
+        'views/account_move_view.xml',
         'report/report_invoice_template.xml',
-        
-
-        
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

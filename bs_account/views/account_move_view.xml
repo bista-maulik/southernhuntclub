@@ -13,4 +13,8 @@
             </xpath>
         </field>
     </record>
+<!-- Inherit Menu of Journal Item to remove the -->
+     <record id="account.menu_action_account_moves_all" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6,0,[])]"/>
+    </record>
 </odoo>

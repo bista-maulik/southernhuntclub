@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['bs_sales'],
+    'depends': ['bs_sales', 'account_batch_payment', 'account_check_printing'],
     # always loaded
     'data': [
         'views/account_move_view.xml',

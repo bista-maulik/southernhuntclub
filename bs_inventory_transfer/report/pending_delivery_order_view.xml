@@ -14,11 +14,11 @@
 <!--                    <field name="available_qty" optional="hide"/>-->
 <!--                    <field name="product_qty" optional="hide"/>-->
                     <field name="on_hand_qty" optional="hide"/>
-                    <field name="sale_price" optional="hide" widget="monetary"/>
+                    <field name="sale_price" optional="hide" widget="monetary" sum="Total Price"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <field name="currency_id" invisible="1"/>
-                    <field name="name"  optional="hide" invisible="1" />
-                    <field name="state"  optional="hide" invisible="1" />
+                    <field name="name"  optional="hide" invisible="1"/>
+                    <field name="state"  optional="hide" invisible="1"/>
                     <field name="picking_type_id" invisible="1" optional="hide"/>   
                 </tree>
             </field>

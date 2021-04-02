@@ -91,7 +91,7 @@ class PendingDeliveryOrderReport(models.Model):
 
     def _where(self):
         return """
-         where (code ='outgoing' and active='t')  and sm.product_uom_qty > 0 and sm.state not in ('done','cancel')
+         where (code ='outgoing' and active='t')  and sm.product_uom_qty > 0 and sm.state not in ('done','cancel') and (sp.origin NOT LIKE 'Return of %' or sp.origin is NULL)
          
         """ 
 
@@ -124,7 +124,7 @@ class PendingDeliveryOrderReport(models.Model):
 
     def init(self):
         self._cr.execute("DROP view IF EXISTS %s CASCADE" % (self._table))
-        self._cr.execute("""
+        query = """
             CREATE OR REPLACE VIEW %s AS (
                 %s
                 %s
@@ -132,4 +132,4 @@ class PendingDeliveryOrderReport(models.Model):
                 %s
             )
         """ % (self._table, self._select(), self._from(), self._where(), self._groupby())
-        )
+        self._cr.execute(query)

@@ -22,9 +22,10 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['bs_sales', 'account_batch_payment', 'account_check_printing'],
+    'depends': ['bs_sales', 'account_batch_payment', 'l10n_us_check_printing'],
     # always loaded
     'data': [
+        'report/print_check.xml',
         'views/account_move_view.xml',
         'report/report_invoice_template.xml',
     ],

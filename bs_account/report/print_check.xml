@@ -23,7 +23,7 @@
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_payee_addr')]"
                    position="attributes">
-                <attribute name="style">margin-top: 10px;</attribute>
+                <attribute name="style">margin-top: 17px;</attribute>
             </xpath>
         </template>
     </data>

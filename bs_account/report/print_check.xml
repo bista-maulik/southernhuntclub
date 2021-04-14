@@ -15,7 +15,7 @@
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_memo')]"
                    position="attributes">
-                <attribute name="style">margin-top: 9px;</attribute>
+                <attribute name="style">margin-top: 10px;</attribute>
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_amount')]"
                    position="attributes">
@@ -23,7 +23,7 @@
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_payee_addr')]"
                    position="attributes">
-                <attribute name="style">margin-top: 7px;</attribute>
+                <attribute name="style">margin-top: 10px;</attribute>
             </xpath>
         </template>
     </data>

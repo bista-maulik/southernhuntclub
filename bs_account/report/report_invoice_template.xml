@@ -10,10 +10,10 @@
                  t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
                  groups="bs_sales.group_customer_address"/>
         </xpath>
-        <xpath expr="//div[@t-field='o.partner_id']" position="before">
-            <strong groups="bs_sales.group_customer_address">Customer Address:
-            </strong>
-        </xpath>
+<!--        <xpath expr="//div[@t-field='o.partner_id']" position="before">-->
+<!--            <strong groups="bs_sales.group_customer_address">Customer Address:-->
+<!--            </strong>-->
+<!--        </xpath>-->
         <xpath expr="//th[@name='th_taxes']" position="attributes">
             <attribute name="t-att-style">'display: none;'</attribute>
         </xpath>

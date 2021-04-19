@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-       <template id="customization_report_delivery_document_report_templates" inherit_id="stock.report_delivery_document">
-              <xpath expr="//t[@t-set='partner']" position="replace">
-                     <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or (o.company_id.partner_id) or False"/>
-              </xpath>
-              
-              <xpath expr="//t[@t-set='address']" position="replace">
-                            <strong groups="bs_sales.group_customer_address">Customer Address:</strong>
-                            <div groups="bs_sales.group_customer_address" t-esc="partner" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
-              </xpath>
-              
-              <xpath expr="//tr[@t-foreach='lines']//span[@t-field='move.product_uom_qty']" position="replace">
-                     <span t-esc="move.set_product_quantity(move.product_uom_qty)"/> 
-              </xpath>
-
-       </template>
+    <template id="customization_report_delivery_document_report_templates" inherit_id="stock.report_delivery_document">
+        <xpath expr="//t[@t-set='partner']" position="replace">
+            <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or (o.company_id.partner_id) or False"/>
+        </xpath>
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <t t-if="o.picking_type_code == 'outgoing'">
+                <strong>Customer Address:</strong>
+                <div t-esc="partner" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+            </t>
+            <t t-else="">
+                <t t-set="address">
+                    <div t-esc="partner"
+                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                </t>
+            </t>
+        </xpath>
+        <xpath expr="//tr[@t-foreach='lines']//span[@t-field='move.product_uom_qty']" position="replace">
+            <span t-esc="move.set_product_quantity(move.product_uom_qty)"/>
+        </xpath>
+    </template>
+    <template id="report_delivery_document_inherit_sale_stock_customer_ref" inherit_id="sale_stock.report_delivery_document_inherit_sale_stock">
+        <xpath expr="//div[hasclass('justify-content-end')]/div/strong" position="replace">
+            <strong>Purchase Order</strong>
+        </xpath>
+    </template>
 </odoo>

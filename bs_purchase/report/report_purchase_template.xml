@@ -70,12 +70,19 @@
                 </tr>
             </table> 
         </xpath>
-
-
-    
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_color"><strong>Color</strong></th>
+            <th name="th_upc"><strong>UPC</strong></th>
+        </xpath>
+        <xpath expr="//td[@id='product']" position="after">
+            <td name="td_color">
+                <span t-field="line.color"/>
+            </td>
+            <td name="td_upc">
+                <span t-field="line.upc"/>
+            </td>
+        </xpath>
     </template>
-
-
 
  <template id="customization_report_purchasequotation_document_templates" inherit_id="purchase.report_purchasequotation_document">
         <xpath expr="//t[@t-set='address']//div[@t-field='o.partner_id']" position="attributes">
@@ -126,10 +133,20 @@
                             </div>
                         </t>
                     </td>
-
-
                 </tr>
             </table> 
         </xpath>
-  </template>
+     <xpath expr="//th[@name='th_description']" position="after">
+         <th name="th_color"><strong>Color</strong></th>
+         <th name="th_upc"><strong>UPC</strong></th>
+     </xpath>
+     <xpath expr="//td[@id='product']" position="after">
+         <td name="td_color">
+             <span t-field="order_line.color"/>
+         </td>
+         <td name="td_upc">
+             <span t-field="order_line.upc"/>
+         </td>
+     </xpath>
+ </template>
 </odoo>

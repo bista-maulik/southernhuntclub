@@ -16,6 +16,7 @@ class SaleReport(models.Model):
     commitment_date = fields.Datetime('Delivery Date', readonly=True)
     total_delivered = fields.Float(string="Total Delivered", readonly=True)
     total_invoiced = fields.Float(string="Total Invoiced", readonly=True)
+    price_total = fields.Float('Total Ordered', readonly=True)
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['sales_rep'] = ", s.sales_rep as sales_rep"

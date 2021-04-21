@@ -54,9 +54,7 @@
         </xpath>
          <xpath expr="//div[@t-field='doc.partner_shipping_id']" position="attributes">
              <attribute name="t-att-style">'display: none;'</attribute>
-        </xpath> 
-
-
+        </xpath>
          <xpath expr="//t[@t-set='address']" position="after">
                 <table  style="width: 100%;border:none;">
                     <!-- <tr style="border:none;" groups="bs_sales.group_customer_address">
@@ -93,21 +91,20 @@
                 </table> 
 
         </xpath>
-
-
-
-   <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
-                <span t-esc="line.set_product_quantity(line.product_uom_qty)"/>
-
-        </xpath> 
-
-
-
-                <!-- 
-                    t-foreach="doc.order_line"
-                    <td name="td_quantity" class="text-right">
-                                    <span t-field="line.product_uom"/>
-                                </td> -->
-
+        <xpath expr="//span[@t-field='line.product_uom_qty']" position="replace">
+            <span t-esc="line.set_product_quantity(line.product_uom_qty)"/>
+        </xpath>
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_color"><strong>Color</strong></th>
+            <th name="th_upc"><strong>UPC</strong></th>
+        </xpath>
+        <xpath expr="//td[@name='td_name']" position="after">
+            <td name="td_color">
+                <span t-field="line.color"/>
+            </td>
+            <td name="td_upc">
+                <span t-field="line.upc"/>
+            </td>
+        </xpath>
     </template>
 </odoo>

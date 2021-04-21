@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['base','product'],
+    'depends': ['product'],
     # always loaded
     'data': [
         'views/product_template_view.xml',

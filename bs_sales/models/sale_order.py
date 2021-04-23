@@ -53,6 +53,9 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    color = fields.Char(related="product_id.color", string="Color")
+    upc = fields.Char(related="product_id.upc", string="UPC")
+
     def set_product_quantity(self,qty):
         qty_data=str(qty)
         qty_data1 = str(qty).split('.')[1]

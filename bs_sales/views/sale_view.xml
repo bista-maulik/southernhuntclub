@@ -24,6 +24,10 @@
             <page name="customer_signature" position="attributes">
                 <attribute name="groups">bs_sales.group_show_customer_signature</attribute>
             </page>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="color" optional="show"/>
+                <field name="upc" optional="show"/>
+            </xpath>
         </field>
     </record>
 

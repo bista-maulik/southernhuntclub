@@ -9,8 +9,8 @@
                 <field name="storage_type" readonly="1" force_save="1"/>
             </xpath>
             <xpath expr="//notebook/page/field[@name='move_raw_ids']/tree/field[@name='company_id']" position="after">
-                <field name="product_onhand_qty" optional="hide"/>
-                <field name="product_available_qty" digits="[42,4]" optional="hide"/>
+                <field name="product_onhand_qty" optional="show"/>
+                <field name="product_available_qty" digits="[42,4]" optional="show"/>
             </xpath>
         </field>
     </record>

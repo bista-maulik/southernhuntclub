@@ -22,8 +22,15 @@
                 <attribute name="style">margin-top: 6px;</attribute>
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_payee_addr')]"
-                   position="attributes">
-                <attribute name="style">margin-top: 17px;</attribute>
+                   position="replace">
+                <div class="ckus_payee_addr" style="margin-top: 17px;" t-esc="page['partner_id'].name"/>
+                <div class="ckus_payee_addr" style="margin-top: 32px;" t-esc="page['partner_id'].street"/>
+                <div class="ckus_payee_addr" style="margin-top: 47px;" t-esc="page['partner_id'].street2"/>
+                <div class="ckus_payee_addr" style="margin-top: 62px;">
+                    <t t-esc="page['partner_id'].city"/>
+                    <t t-esc="page['partner_id'].state_id.code"/>
+                    <t t-esc="page['partner_id'].zip"/>
+                </div>
             </xpath>
         </template>
     </data>

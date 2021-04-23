@@ -23,13 +23,15 @@
             </xpath>
             <xpath expr="//div[hasclass('ckus_check')]/div[hasclass('ckus_payee_addr')]"
                    position="replace">
-                <div class="ckus_payee_addr" style="margin-top: 17px;" t-esc="page['partner_id'].name"/>
-                <div class="ckus_payee_addr" style="margin-top: 32px;" t-esc="page['partner_id'].street"/>
-                <div class="ckus_payee_addr" style="margin-top: 47px;" t-esc="page['partner_id'].street2"/>
-                <div class="ckus_payee_addr" style="margin-top: 62px;">
-                    <t t-esc="page['partner_id'].city"/>
-                    <t t-esc="page['partner_id'].state_id.code"/>
-                    <t t-esc="page['partner_id'].zip"/>
+                <div class="ckus_payee_addr" style="margin-top: 17px;">
+                    <div t-if="page['partner_id'].name" t-esc="page['partner_id'].name"/>
+                    <div t-if="page['partner_id'].street" t-esc="page['partner_id'].street"/>
+                    <div t-if="page['partner_id'].street2" t-esc="page['partner_id'].street2"/>
+                    <div>
+                        <t t-if="page['partner_id'].city" t-esc="page['partner_id'].city"/>
+                        <t t-if="page['partner_id'].state_id" t-esc="page['partner_id'].state_id.code"/>
+                        <t t-if="page['partner_id'].zip" t-esc="page['partner_id'].zip"/>
+                    </div>
                 </div>
             </xpath>
         </template>

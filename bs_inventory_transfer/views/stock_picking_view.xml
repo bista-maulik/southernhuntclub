@@ -49,4 +49,16 @@
         <field name="groups_id"
                eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
     </record>
+
+    <!-- Inherit the tree view of stock.picking to add check availability button-->
+    <record id="view_picking_tree_check_availability" model="ir.ui.view">
+        <field name="name">stock.picking.tree.check_availability.button</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_assign" type="object" string="Check Availability"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

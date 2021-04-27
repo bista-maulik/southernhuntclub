@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_delivery_document_add_delivery_tab" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div t-if="o.preferred_carrier_id" class="col-auto" name="div_preferred_carrier">
+                <strong>Preferred Carrier:</strong>
+                <p t-field="o.preferred_carrier_id.name"/>
+            </div>
+            <div t-if="o.acc_number" class="col-auto" name="div_account_number">
+                <strong>Account Number:</strong>
+                <p t-field="o.acc_number"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

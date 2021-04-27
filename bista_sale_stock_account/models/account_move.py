@@ -15,10 +15,14 @@ class AccountMove(models.Model):
     preferred_carrier_id = fields.Many2one('preferred.carrier',
                                            string="Preferred Carrier")
     acc_number = fields.Char(string="Account Number")
-    delivery_instruction = fields.Char(string="Delivery Instructions")
-    tracking_no = fields.Char(string="Tracking")
+    delivery_instruction = fields.Text(string="Delivery Instructions")
+    tracking_no = fields.Char(string="Tracking", size=50)
 
     def unlink(self):
+        """
+        Override the function to reset the is_invoice_tracking in delivery order.
+        :return:
+        """
         for rec in self:
             picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
             if len(picking_ids) == len(rec.tracking_no.split(',')):
@@ -26,6 +30,10 @@ class AccountMove(models.Model):
         return super(AccountMove, self).unlink()
 
     def button_cancel(self):
+        """
+        Override the function to reset the is_invoice_tracking in delivery order.
+        :return:
+        """
         for rec in self:
             picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
             if len(picking_ids) == len(rec.tracking_no.split(',')):

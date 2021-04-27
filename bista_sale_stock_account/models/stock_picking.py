@@ -15,6 +15,6 @@ class StockPicking(models.Model):
     preferred_carrier_id = fields.Many2one('preferred.carrier',
                                            string="Preferred Carrier")
     acc_number = fields.Char(string="Account Number")
-    delivery_instruction = fields.Char(string="Delivery Instructions")
-    tracking_no = fields.Char(string="Tracking", copy=False)
+    delivery_instruction = fields.Text(string="Delivery Instructions")
+    tracking_no = fields.Char(string="Tracking", copy=False, size=50)
     is_invoice_tracking = fields.Boolean(string="Set Tracking in Invoice")

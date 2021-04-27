@@ -11,10 +11,12 @@
                         <group>
                             <field name="preferred_carrier_id" readonly="1"/>
                             <field name="acc_number" readonly="1"/>
-                            <field name="delivery_instruction" readonly="1"/>
                             <field name="tracking_no" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
                             <field name="is_invoice_tracking" invisible="1"/>
                         </group>
+                        <label style="font-weight:bold;" for="delivery_instruction"
+                               string="Delivery Instructions:"/>
+                        <field name="delivery_instruction" readonly="1"/>
                     </group>
                 </page>
             </xpath>

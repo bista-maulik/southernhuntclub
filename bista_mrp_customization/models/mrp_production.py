@@ -35,4 +35,5 @@ class MrpProduction(models.Model):
                 backorders.move_raw_ids._do_unreserve()
                 backorders.move_raw_ids.write({'state': 'draft'})
                 backorders.button_unplan()
+                backorders.write({'qty_producing': 0.0})
         return backorders

@@ -12,8 +12,11 @@
                         <group>
                             <field name="preferred_carrier_id" attrs="{'readonly': [('state', 'not in' ,['draft', 'sent'])]}"/>
                             <field name="acc_number" attrs="{'readonly': [('state', 'not in' ,['draft', 'sent'])]}"/>
-                            <field name="delivery_instruction" attrs="{'readonly': [('state', 'not in' ,['draft', 'sent'])]}"/>
                         </group>
+                        <label style="font-weight:bold;" for="delivery_instruction"
+                               string="Delivery Instructions:"/>
+                        <field name="delivery_instruction" placeholder="Add Delivery Instructions Here..."
+                               attrs="{'readonly': [('state', 'not in' ,['draft', 'sent'])]}"/>
                     </group>
                 </page>
             </xpath>

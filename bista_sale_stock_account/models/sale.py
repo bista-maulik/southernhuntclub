@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
     preferred_carrier_id = fields.Many2one('preferred.carrier',
                                            string="Preferred Carrier")
     acc_number = fields.Char(string="Account Number")
-    delivery_instruction = fields.Char(string="Delivery Instructions")
+    delivery_instruction = fields.Text(string="Delivery Instructions")
 
     def _prepare_invoice(self):
         """

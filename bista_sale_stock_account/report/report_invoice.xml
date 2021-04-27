@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_invoice_document_add_delivery_tab" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('clearfix')]" position="after">
+            <br/>
+            <div id="delivery_tab_info" class="row mt32 mb32">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.preferred_carrier_id"
+                     name="preferred_carrier">
+                    <strong>Preferred Carrier:</strong>
+                    <p class="m-0" t-field="o.preferred_carrier_id.name"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2"
+                     t-if="o.tracking_no" name="tracking_no">
+                    <strong>Tracking:</strong>
+                    <p class="m-0" t-field="o.tracking_no"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

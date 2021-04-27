@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_backend" name="web_tree_many2one_clickable assets"
+        inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/bista_list_view_clickable/static/src/css/web_tree_many2one_clickable.scss"/>
+            <script type="text/javascript" src="/bista_list_view_clickable/static/src/js/web_tree_many2one_clickable.js"/>
+        </xpath>
+    </template>
+</odoo>

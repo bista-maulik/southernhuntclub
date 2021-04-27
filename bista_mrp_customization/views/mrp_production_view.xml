@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group[2]/field[@name='company_id']" position="after">
+                <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
+                <field name="backorder_ids" invisible="1"/>
+                <field name="is_wo_processed" invisible="1"/>
+            </xpath>
+            <xpath expr="//header/button[@name='button_plan']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', '|', '|', ('is_wo_processed', '=', True), ('state', 'not in', ('confirmed', 'progress', 'to_close')), ('workorder_ids', '=', []), ('is_planned', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

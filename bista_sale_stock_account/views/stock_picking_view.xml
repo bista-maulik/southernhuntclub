@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_delivery_tab" model="ir.ui.view">
+        <field name="name">stock.picking.form.delivery.tab</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='extra']" position="after">
+                <page string="Delivery" name="delivery_tab">
+                    <group>
+                        <group>
+                            <field name="preferred_carrier_id" readonly="1"/>
+                            <field name="acc_number" readonly="1"/>
+                            <field name="tracking_no" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="is_invoice_tracking" invisible="1"/>
+                        </group>
+                        <label style="font-weight:bold;" for="delivery_instruction"
+                               string="Delivery Instructions:"/>
+                        <field name="delivery_instruction" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

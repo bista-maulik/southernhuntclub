@@ -24,9 +24,10 @@ class AccountMove(models.Model):
         :return:
         """
         for rec in self:
-            picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
-            if len(picking_ids) == len(rec.tracking_no.split(',')):
-                picking_ids.write({'is_invoice_tracking': False})
+            if rec.tracking_no:
+                picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
+                if len(picking_ids) == len(rec.tracking_no.split(',')):
+                    picking_ids.write({'is_invoice_tracking': False})
         return super(AccountMove, self).unlink()
 
     def button_cancel(self):
@@ -35,7 +36,8 @@ class AccountMove(models.Model):
         :return:
         """
         for rec in self:
-            picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
-            if len(picking_ids) == len(rec.tracking_no.split(',')):
-                picking_ids.write({'is_invoice_tracking': False})
+            if rec.tracking_no:
+                picking_ids = self.env['stock.picking'].search([('tracking_no', 'in', rec.tracking_no.split(','))])
+                if len(picking_ids) == len(rec.tracking_no.split(',')):
+                    picking_ids.write({'is_invoice_tracking': False})
         return super(AccountMove, self).button_cancel()

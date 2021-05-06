@@ -39,8 +39,12 @@ class MrpProduction(models.Model):
         """
         super(MrpProduction, self)._compute_state()
         for production in self:
-            if production.state == 'to_close' and not all(wo_state in ('done', 'cancel') for wo_state in production.workorder_ids.mapped('state')):
-                production.state = 'progress'
+            if production.state == 'to_close':
+                if any(wo.state == 'ready' for wo in production.workorder_ids) and all(
+                        wo.state != 'done' for wo in production.workorder_ids):
+                    production.state = 'confirmed'
+                elif not all(wo_state in ('done', 'cancel') for wo_state in production.workorder_ids.mapped('state')):
+                    production.state = 'progress'
 
     def _generate_backorder_productions(self, close_mo=True):
         """

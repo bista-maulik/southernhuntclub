@@ -18,14 +18,37 @@ class MrpProduction(models.Model):
 
     @api.depends('workorder_ids')
     def _compute_workorder_processed(self):
+        """
+        Define compute method to set is_wo_processed field value.
+        :return:
+        """
         for rec in self:
             rec.is_wo_processed = False
             if rec.workorder_ids and all(
                     wo.state == 'done' for wo in self.workorder_ids):
                 rec.is_wo_processed = True
 
+    @api.depends(
+        'move_raw_ids.state', 'move_raw_ids.quantity_done',
+        'move_finished_ids.state',
+        'workorder_ids', 'workorder_ids.state', 'product_qty', 'qty_producing')
+    def _compute_state(self):
+        """
+        Override the function to improvement in state of manufacturing.
+        :return:
+        """
+        super(MrpProduction, self)._compute_state()
+        for production in self:
+            if production.state == 'to_close' and not all(wo_state in ('done', 'cancel') for wo_state in production.workorder_ids.mapped('state')):
+                production.state = 'progress'
 
     def _generate_backorder_productions(self, close_mo=True):
+        """
+        Override function to make changes in backorder and set as new
+        manufacturing order.
+        :param close_mo:
+        :return:
+        """
         backorders = super(MrpProduction, self)._generate_backorder_productions(close_mo=close_mo)
         if backorders:
             backorders.write({'backorder_id': self.id})

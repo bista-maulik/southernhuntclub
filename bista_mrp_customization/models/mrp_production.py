@@ -55,7 +55,14 @@ class MrpProduction(models.Model):
         """
         backorders = super(MrpProduction, self)._generate_backorder_productions(close_mo=close_mo)
         if backorders:
-            backorders.write({'backorder_id': self.id})
+            if len(self) > 1:
+                for rec in self:
+                    if rec.procurement_group_id.mrp_production_ids and (
+                            rec.procurement_group_id.mrp_production_ids - rec in backorders):
+                        backorder = rec.procurement_group_id.mrp_production_ids - rec
+                        backorder.write({'backorder_id': rec.id})
+            else:
+                backorders.write({'backorder_id': self.id})
             if any(move.state not in ('draft', 'done', 'cancel') for move in backorders.move_raw_ids):
                 if backorders.move_raw_ids.mapped('move_line_ids'):
                     backorders.move_raw_ids.mapped('move_line_ids').filtered(lambda x: x.qty_done > 0).write({'qty_done': 0.0})

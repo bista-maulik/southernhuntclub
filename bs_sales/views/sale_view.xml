@@ -88,7 +88,15 @@
             <xpath expr="//field[@name='team_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="total_cost" optional="hide" sum="Total Costs" invisible="not context.get('action_delivery_invoice', False)"/>
+            </xpath>
         </field>
+    </record>
+
+    <!-- Inherit Action to show the total Cost in only for this action view.-->
+    <record id="sale.action_orders_to_invoice" model="ir.actions.act_window">
+        <field name="context">{'create': False, 'action_delivery_invoice': True}</field>
     </record>
 
     <record id="sale_order_search_inherit_sales_rep_order_tree" model="ir.ui.view">

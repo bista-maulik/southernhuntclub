@@ -99,6 +99,18 @@
         <field name="context">{'create': False, 'action_delivery_invoice': True}</field>
     </record>
 
+<!-- Inherit the pivot view  to add total cost field-->
+    <record id="view_sale_order_pivot_total_cost" model="ir.ui.view">
+        <field name="name">sale.order.pivot.total.cost</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sale_order_pivot"/>
+        <field name="arch" type="xml">
+            <pivot position="inside">
+                <field name="total_cost" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
     <record id="sale_order_search_inherit_sales_rep_order_tree" model="ir.ui.view">
         <field name="name">sale.order.search.order.tree.inherit.sales.rep</field>
         <field name="model">sale.order</field>

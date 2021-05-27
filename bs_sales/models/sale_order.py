@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
                                            "If set, the delivery order will be scheduled based on "
                                            "this date rather than product lead times."
                                            ,default=lambda self: fields.datetime.now())
-    total_cost = fields.Float(string="Total Cost", compute="_compute_total_cost")
+    total_cost = fields.Float(string="Total Cost", store=True, readonly=True, compute="_compute_total_cost")
 
     @api.depends('order_line.purchase_price', 'order_line.qty_delivered')
     def _compute_total_cost(self):

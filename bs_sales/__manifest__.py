@@ -22,7 +22,7 @@
     'version': '1',
 
     # Dependent module required for this module to be installed
-    'depends': ['sale_management','crm', 'sale_stock', 'bs_product'],
+    'depends': ['sale_margin','crm', 'sale_stock', 'bs_product'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',

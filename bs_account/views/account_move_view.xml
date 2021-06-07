@@ -20,8 +20,24 @@
             <xpath expr="//group[@id='header_right_group']/div[hasclass('d-flex')]/field[@name='invoice_payment_term_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
+                <field name="line_cost" invisible="1"/>
+            </xpath>
         </field>
     </record>
+
+    <!--  Inherit the list view to add Total cost field-->
+    <record id="view_out_invoice_tree" model="ir.ui.view">
+        <field name="name"></field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='amount_total_signed']" position="before">
+                <field name="total_cost" optional="hide" sum="Total Costs"/>
+            </xpath>
+        </field>
+    </record>
+
 <!-- Inherit Menu of Journal Item to remove the -->
      <record id="account.menu_action_account_moves_all" model="ir.ui.menu">
         <field name="groups_id" eval="[(6,0,[])]"/>

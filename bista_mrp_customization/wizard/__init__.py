@@ -6,5 +6,4 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from . import wizard_mo_confirmation

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Define the form view of mo confirmation wizard-->
+    <record id="view_wizard_mo_confirmation_form" model="ir.ui.view">
+        <field name="name">wizard.mo.confirmation.form</field>
+        <field name="model">wizard.mo.confirmation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="name" nolable="1" readonly="1"/>
+                    <field name="production_id" invisible="1"/>
+                    <footer>
+                        <button name="confirm_mo" string="Confirm"
+                                type="object"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default"
+                                special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

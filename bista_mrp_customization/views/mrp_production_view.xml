@@ -9,6 +9,7 @@
                 <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
                 <field name="backorder_ids" invisible="1"/>
                 <field name="is_wo_processed" invisible="1"/>
+                <field name="is_transfer_pending" invisible="1"/>
             </xpath>
             <xpath expr="//header/button[@name='button_plan']" position="attributes">
                 <attribute name="attrs">{'invisible': ['|', '|', '|', ('is_wo_processed', '=', True), ('state', 'not in', ('confirmed', 'progress', 'to_close')), ('workorder_ids', '=', []), ('is_planned', '=', True)]}</attribute>

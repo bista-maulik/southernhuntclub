@@ -64,6 +64,8 @@ class ShopifyResPartnerEpt(models.Model):
             "is_shopify_customer": True,
             "type": "contact",
         })
+        if instance and instance.shopify_company_id:
+            partner_vals.update({"company_id": instance.shopify_company_id.id})
         partner = partner_obj.create(partner_vals)
 
         shopify_partner_values.update({"partner_id": partner.id})

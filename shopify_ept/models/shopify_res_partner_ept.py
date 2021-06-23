@@ -65,6 +65,10 @@ class ShopifyResPartnerEpt(models.Model):
             "is_shopify_customer": True,
             "type": "contact",
         })
+        print("\n\n\n******************------------", partner_vals)
+        print("\n\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@", instance)
+        if instance:
+            print("\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!", instance.shopify_company_id)
         partner = partner_obj.create(partner_vals)
 
         shopify_partner_values.update({"partner_id": partner.id})

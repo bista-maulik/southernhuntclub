@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # See LICENSE file for full copyright and licensing details.
-import logging
 from odoo import models, fields, api
-
-_logger = logging.getLogger("Shopify Order")
 
 
 class ShopifyResPartnerEpt(models.Model):
@@ -67,10 +64,6 @@ class ShopifyResPartnerEpt(models.Model):
             "is_shopify_customer": True,
             "type": "contact",
         })
-        _logger.info("Customer Vals>>>>>>>>>>>%s", partner_vals)
-        _logger.info("Instance !!!!!!!!!!!!1>>>>>>>>>>>%s", instance)
-        if instance:
-            _logger.info("Instance !!!!!!!!!!!!1>>>>>>>>>>>%s", instance.shopify_company_id)
         partner = partner_obj.create(partner_vals)
 
         shopify_partner_values.update({"partner_id": partner.id})

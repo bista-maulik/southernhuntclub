@@ -56,7 +56,7 @@ class ShopifyResPartnerEpt(models.Model):
                 self.create(shopify_partner_values)
                 return partner
 
-        partner_vals = self.shopify_prepare_partner_vals(vals.get("default_address", {}))
+        partner_vals = self.shopify_prepare_partner_vals(vals.get("default_address", {}), instance=instance)
 
         partner_vals.update({
             "name": name,
@@ -65,8 +65,6 @@ class ShopifyResPartnerEpt(models.Model):
             "is_shopify_customer": True,
             "type": "contact",
         })
-        if instance and instance.shopify_company_id:
-            partner_vals.update({"company_id": instance.shopify_company_id.id})
         partner = partner_obj.create(partner_vals)
 
         shopify_partner_values.update({"partner_id": partner.id})
@@ -90,7 +88,7 @@ class ShopifyResPartnerEpt(models.Model):
         return partner
 
     @api.model
-    def shopify_create_or_update_address(self, shopify_customer_data, parent_partner, partner_type="contact"):
+    def shopify_create_or_update_address(self, shopify_customer_data, parent_partner, partner_type="contact", instance=False):
         """
         Creates or updates existing partner from Shopify customer's data.
         @author: Maulik Barad on Date 09-Sep-2020.
@@ -104,7 +102,7 @@ class ShopifyResPartnerEpt(models.Model):
             return False
 
         company_name = shopify_customer_data.get("company")
-        partner_vals = self.shopify_prepare_partner_vals(shopify_customer_data)
+        partner_vals = self.shopify_prepare_partner_vals(shopify_customer_data, instance=instance)
         address_key_list = ["name", "street", "street2", "city", "zip", "phone", "state_id", "country_id"]
 
         if company_name:
@@ -130,7 +128,7 @@ class ShopifyResPartnerEpt(models.Model):
         company_name and partner.write({"company_name": company_name})
         return partner
 
-    def shopify_prepare_partner_vals(self, vals):
+    def shopify_prepare_partner_vals(self, vals, instance=False):
         """
         This method used to prepare a partner vals.
         @param : self,vals
@@ -164,4 +162,6 @@ class ShopifyResPartnerEpt(models.Model):
             "country_id": country and country.id or False,
             "is_company": False
         }
+        if instance and instance.shopify_company_id:
+            partner_vals.update({"company_id": instance.shopify_company_id.id})
         return partner_vals

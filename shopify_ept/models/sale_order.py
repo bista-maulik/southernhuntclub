@@ -130,11 +130,11 @@ class SaleOrder(models.Model):
 
         invoice_address = order_response.get(
             "billing_address") and shopify_res_partner_obj.shopify_create_or_update_address(
-            order_response.get("billing_address"), partner, "invoice") or partner
+            order_response.get("billing_address"), partner, "invoice", instance=instance) or partner
 
         delivery_address = order_response.get(
             "shipping_address") and shopify_res_partner_obj.shopify_create_or_update_address(
-            order_response.get("shipping_address"), partner, "delivery") or partner
+            order_response.get("shipping_address"), partner, "delivery", instance=instance) or partner
 
         # Below condition as per the task 169257.
         if not partner and invoice_address and delivery_address:
@@ -319,7 +319,6 @@ class SaleOrder(models.Model):
                 if order_data_line:
                     order_data_line.write({"state": "failed", "processed_at": datetime.now()})
                 continue
-
             sale_order = self.shopify_create_order(instance, partner, delivery_address, invoice_address,
                                                    order_data_line, order_response, log_book, lines, order_number)
             if not sale_order:

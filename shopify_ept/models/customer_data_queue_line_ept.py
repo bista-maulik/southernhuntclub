@@ -179,7 +179,7 @@ class ShopifyCustomerDataQueueLineEpt(models.Model):
                 for address in customer_data.get("addresses"):
                     if address.get("default"):
                         continue
-                    shopify_partner_obj.shopify_create_or_update_address(address, main_partner)
+                    shopify_partner_obj.shopify_create_or_update_address(address, main_partner, instance=instance)
 
                 line.update({"state": "done", "last_process_date": datetime.now()})
             else:

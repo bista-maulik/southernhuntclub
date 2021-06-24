@@ -35,7 +35,7 @@ class ResPartner(models.Model):
                                                       ("shopify_instance_id", "=", instance.id)],
                                                      limit=1)
 
-        partner_vals = shopify_partner_obj.shopify_prepare_partner_vals(address)
+        partner_vals = shopify_partner_obj.shopify_prepare_partner_vals(address, instance=instance)
         partner_vals = self.update_name_in_partner_vals(partner_vals, first_name, last_name, email, phone)
         if shopify_partner:
             parent_id = shopify_partner.partner_id.id

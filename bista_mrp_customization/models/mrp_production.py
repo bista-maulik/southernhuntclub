@@ -70,18 +70,21 @@ class MrpProduction(models.Model):
         done or not.
         :return:
         """
-        if self.is_transfer_pending and not self._context.get('confirmation', False):
-            return {
-                'name': "Manufacturing Confirmation",
-                'res_model': 'wizard.mo.confirmation',
-                'type': 'ir.actions.act_window',
-                'view_mode': 'form',
-                'view_type': 'form',
-                'view_id': self.env.ref(
-                    'bista_mrp_customization.view_wizard_mo_confirmation_form').id,
-                'target': 'new',
-                'context': {'default_production_id': self.id}
-            }
+
+        # added loop for subcontracting singleton issue.
+        for rec in self:
+            if rec.is_transfer_pending and not self._context.get('confirmation', False):
+                return {
+                    'name': "Manufacturing Confirmation",
+                    'res_model': 'wizard.mo.confirmation',
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form',
+                    'view_type': 'form',
+                    'view_id': self.env.ref(
+                        'bista_mrp_customization.view_wizard_mo_confirmation_form').id,
+                    'target': 'new',
+                    'context': {'default_production_id': rec.id}
+                }
         return super(MrpProduction, self).button_mark_done()
 
     def _generate_backorder_productions(self, close_mo=True):

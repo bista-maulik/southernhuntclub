@@ -161,6 +161,11 @@ class ShopifyResPartnerEpt(models.Model):
             "country_id": country and country.id or False,
             "is_company": False
         }
+        domain = [('name', 'like', '%Websales')]
         if instance and instance.shopify_company_id:
             partner_vals.update({"company_id": instance.shopify_company_id.id})
+            domain.append(('company_id', '=', instance.shopify_company_id.id))
+        sales_rep_id = self.env['sales.rep'].search(domain, limit=1)
+        if sales_rep_id:
+            partner_vals.update({'sales_rep': sales_rep_id.id})
         return partner_vals

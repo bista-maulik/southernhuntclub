@@ -5,15 +5,21 @@
         <xpath expr="//div[@t-if='o.partner_id.vat']" position="attributes">
             <attribute name="t-att-style">'display: none;'</attribute>
         </xpath>
+        <xpath expr="//div[@t-field='o.partner_id']" position="before">
+            <strong>Billing Address:</strong>
+        </xpath>
         <xpath expr="//div[@t-field='o.partner_id']" position="replace">
             <div t-field="o.partner_id"
-                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
-                 groups="bs_sales.group_customer_address"/>
+                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
         </xpath>
-<!--        <xpath expr="//div[@t-field='o.partner_id']" position="before">-->
-<!--            <strong groups="bs_sales.group_customer_address">Customer Address:-->
-<!--            </strong>-->
-<!--        </xpath>-->
+        <xpath expr="//div[@id='informations']" position="before">
+            <div id="customer_name" class="row mt32 mb32">
+                <h5 class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id" name="customer_name">
+                    <strong>Customer Name:</strong>
+                    <span t-field="o.partner_id.name"/>
+                </h5>
+            </div>
+        </xpath>
         <xpath expr="//th[@name='th_taxes']" position="attributes">
             <attribute name="t-att-style">'display: none;'</attribute>
         </xpath>
